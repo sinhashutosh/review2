@@ -1,5 +1,7 @@
 #!/bin/bash
 temp=21;
+head=0;
+tail=0;
 for (( i=0; ;i++ ))
 do 
 	flip=$((RANDOM%2));
@@ -9,26 +11,38 @@ do
 	else
 		((tail++));
 	fi
+	if [ $head -eq $tail ]
+	then
+		echo "Game Tie ";
+		continue;
+	fi
+	check=$((head-tail));
+	if [ $check -eq -2 ]
+	then
+		echo "HEAD = "$head;
+		echo "TAIL ="$tail;
+		exit 0;
+	fi
+	if [ $check -eq 2 ]
+	then
+		echo "HEAD = "$head;
+		echo "TAIL ="$tail;
+		exit 0;
+	fi
 	if [ $head -eq $temp ]
 	then
 		echo "Head won by $((head-tail))";
-			echo "Head = "$head;
-			echo "Tail = "$tail;
+		echo "HEAD = "$head;
+		echo "TAIL ="$tail;
 		exit;
 	fi
 	if [ $tail -eq $temp ]
 	then
 		echo "Tail won by $((tail-head))";
-			echo "Head = "$head;
-			echo "Tail = "$tail;
+			echo $head;
+			echo $tail;
 		exit;
 	fi
-	if [ $head -eq $tail ]
-	then
-		echo "Game Tie ";
-		echo "Head = "$head;
-		echo "Tail = "$tail;
-		exit;
-	fi
-
 done
+	echo $head;
+	echo $tail;
