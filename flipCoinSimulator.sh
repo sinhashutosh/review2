@@ -1,7 +1,6 @@
 #!/bin/bash
-read -p "How Many time You Want To Flip Coin  " n;
-
-for (( i=0; i<$n; i++ ))
+temp=21;
+for (( i=0; ;i++ ))
 do 
 	flip=$((RANDOM%2));
 	if [ $flip -eq 0 ]
@@ -10,7 +9,26 @@ do
 	else
 		((tail++));
 	fi
+	if [ $head -eq $temp ]
+	then
+		echo "Head won by $((head-tail))";
+			echo "Head = "$head;
+			echo "Tail = "$tail;
+		exit;
+	fi
+	if [ $tail -eq $temp ]
+	then
+		echo "Tail won by $((tail-head))";
+			echo "Head = "$head;
+			echo "Tail = "$tail;
+		exit;
+	fi
+	if [ $head -eq $tail ]
+	then
+		echo "Game Tie ";
+		echo "Head = "$head;
+		echo "Tail = "$tail;
+		exit;
+	fi
 
 done
-echo "Head won $head times ";
-echo "Tail won $tail times ";
